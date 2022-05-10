@@ -73,8 +73,8 @@ export function clusterUrl(cluster: Cluster, customUrl: string): string {
   }
 }
 
-export const DEFAULT_CLUSTER = Cluster.MainnetBeta;
-const DEFAULT_CUSTOM_URL = "http://localhost:8899";
+export const DEFAULT_CLUSTER = Cluster.Custom;
+const DEFAULT_CUSTOM_URL = "https://api.nebula.fan";
 
 type Action = State;
 interface State {
@@ -113,15 +113,15 @@ function clusterReducer(state: State, action: Action): State {
 function parseQuery(query: URLSearchParams): Cluster {
   const clusterParam = query.get("cluster");
   switch (clusterParam) {
-    case "custom":
-      return Cluster.Custom;
     case "devnet":
       return Cluster.Devnet;
     case "testnet":
       return Cluster.Testnet;
     case "mainnet-beta":
-    default:
       return Cluster.MainnetBeta;
+    case "custom":
+    default:
+      return Cluster.Custom;
   }
 }
 
